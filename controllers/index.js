@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-router.get('/', async (req, res) => {
-    res.render('partial');
-});
+const blogRoutes = require('./blog-routes');
+
+router.use('/', blogRoutes);
 
 module.exports = router;
