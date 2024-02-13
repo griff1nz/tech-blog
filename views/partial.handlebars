@@ -1,8 +1,10 @@
 {{!-- <h1 class="text-9xl">Testing ze main layout</h1> --}}
 {{#if loggedIn}}
 <div>
-    {{#each posts as |post|}}
-    {{> blog-post}}
+    {{#each posts as |data|}}
+    {{> card}}
     {{/each}}
 </div>
+{{else}}
+<p class="text-center">Welcome! Please sign in.</p>
 {{/if}}

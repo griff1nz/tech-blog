@@ -1,0 +1,20 @@
+{{#if loggedIn}}
+<div class="m-2">
+
+    <div class="bg-slate-200 p-2">
+        <p class="text-6xl">{{postData.title}}</p>
+    </div>
+    <div class='border-2 border-slate-200 p-2'>
+        <p>{{postData.content}}</p>
+        <p class="text-end">{{postData.user.username}} on {{postData.date}}</p>
+    </div>
+    <div class="mt-4">
+        <p>Comments: {{postData.comments.length}}</p>
+        {{#each postData.comments as |comment|}}
+        {{> comment-card}}
+        {{/each}}
+    </div>
+</div>
+{{else}}
+<p class="text-center">Please sign in to view posts.</p>
+{{/if}}

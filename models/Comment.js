@@ -11,12 +11,9 @@ Comment.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        title: {
+        date: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                len: [1, 40],
-            },
         },
         content: {
             type: DataTypes.STRING,

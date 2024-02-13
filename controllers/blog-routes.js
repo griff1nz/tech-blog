@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { BlogPost, Comment, User } = require('../models');
+const moment = require('moment');
 
 router.get('/', async (req, res) => {
     try {
@@ -7,7 +8,13 @@ router.get('/', async (req, res) => {
             include: [
                 {
                     model: Comment,
-                    attributes: ['title', 'content', 'user_id'],
+                    attributes: ['content', 'user_id'],
+                    include: [
+                        {
+                            model: User,
+                            attributes: ['username'],
+                        },
+                    ]
                 },
                 {
                     model: User,
@@ -23,13 +30,13 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/posts/:id', async(req, res) => {
+router.get('/posts/:id', async (req, res) => {
     try {
-        const postData = await BlogPost.findByPk(req.params.id, {
+        const dbPostData = await BlogPost.findByPk(req.params.id, {
             include: [
                 {
                     model: Comment,
-                    attributes: ['title', 'content', 'user_id'],
+                    attributes: ['content', 'user_id', 'date'],
                     include: [
                         {
                             model: User,
@@ -43,28 +50,31 @@ router.get('/posts/:id', async(req, res) => {
                 },
             ],
         })
-        res.status(200).json(postData);
-    } catch(err) {
+        const postData = dbPostData.get({ plain: true });
+        res.render('post', { postData, loggedIn: req.session.loggedIn });
+        // res.status(200).json(postData);
+    } catch (err) {
         res.status(500).json(err);
     }
 })
 
-router.post('/comments', async(req, res) => {
+router.post('/posts/:id/comments', async (req, res) => {
     try {
+        const today = moment().format('MM-DD-YYYY');
         const userId = req.session.user_id;
         const commentData = await Comment.create({
-            title: req.body.title,
             content: req.body.content,
             user_id: userId,
-            post_id: req.body.post_id,
+            post_id: req.params.id,
+            date: today
         });
         res.status(200).json(commentData);
-    } catch(err) {
+    } catch (err) {
         res.status(500).json(err);
     }
 })
 
-router.get('/posts/:id/comments', async(req, res) => {
+router.get('/posts/:id/comments', async (req, res) => {
     try {
         const commentData = await Comment.findAll({
             where: {
@@ -78,22 +88,24 @@ router.get('/posts/:id/comments', async(req, res) => {
             ],
         });
         res.status(200).json(commentData);
-    } catch(err) {
+    } catch (err) {
         res.status(500).json(err);
     }
 });
 
 router.post('/posts', async (req, res) => {
     try {
-    const userId = req.session.user_id;
-    console.log(userId);
-    const newPost = await BlogPost.create({
-        title: req.body.title,
-        content: req.body.content,
-        user_id: userId,
-    });
-    res.status(200).json(newPost); 
-} catch (err) {
+        const today = moment().format('MM-DD-YYYY');
+        const userId = req.session.user_id;
+        console.log(userId);
+        const newPost = await BlogPost.create({
+            title: req.body.title,
+            content: req.body.content,
+            user_id: userId,
+            date: today,
+        });
+        res.status(200).json(newPost);
+    } catch (err) {
         res.status(500).json(err);
     }
 })
