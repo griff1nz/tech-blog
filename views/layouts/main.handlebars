@@ -12,7 +12,16 @@
     <div class="bg-blue-400 p-4">
         <h1 class="text-red-700 text-6xl">Page title</h1>
     </div>
+    {{#if loggedIn}}
+    <button id="logout">Logout</button>
+    <a href='/dashbard'><button id="dashboard">Dashboard</button></a>
+    {{else}}
+    <a href='/login'><button>Login</button></a>
+    {{/if}}
     {{{ body }}}
+    {{#if loggedIn}}
+    <script src="./js/logout.js"></script>
+    {{/if}}
 </body>
 
 </html>

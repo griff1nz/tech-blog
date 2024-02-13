@@ -1,1 +1,8 @@
-<h1 class="text-9xl">Testing ze main layout</h1>
+{{!-- <h1 class="text-9xl">Testing ze main layout</h1> --}}
+{{#if loggedIn}}
+<div>
+    {{#each posts as |post|}}
+    {{> blog-post}}
+    {{/each}}
+</div>
+{{/if}}
