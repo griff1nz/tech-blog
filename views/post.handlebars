@@ -15,6 +15,7 @@
             <textarea class="w-10/12" id='comment-field'></textarea>
             <button type="submit">Add comment</button>
         </form>
+            <button id="cancel" style="display: none">Cancel</button>
         {{#each postData.comments as |comment|}}
         {{> comment-card}}
         {{/each}}

@@ -16,7 +16,7 @@
     {{#if loggedIn}}
     <div class="m-2">
     <button id="logout">Logout</button>
-    <a href='/dashbard'><button id="dashboard">Dashboard</button></a>
+    <button onClick='location.href = "/dashboard";' id="dashboard">Dashboard</button> {{!--https://stackoverflow.com/questions/16562577/how-can-i-make-a-button-redirect-my-page-to-another-page--}}
     </div>
     {{else}}
     <a href='/login'><button>Login</button></a>

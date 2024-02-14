@@ -1,6 +1,7 @@
 {{!-- <h1 class="text-9xl">Testing ze main layout</h1> --}}
 {{#if loggedIn}}
 <div>
+    <button onClick='location.href = "/newpost";' id="newpost">Add new post</button>
     {{#each posts as |data|}}
     {{> card}}
     {{/each}}

@@ -127,4 +127,12 @@ router.get('/signup', async (req, res) => {
     res.render('signup');
 });
 
+router.get('/newpost', async(req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('newpost', {loggedIn: req.session.loggedIn});
+})
+
 module.exports = router;

@@ -1,6 +1,7 @@
 const commentHandler = () => {
     document.querySelector('#comment-add').style.display = 'none';
     document.querySelector('#comment').style.display = 'inline';
+    document.querySelector('#cancel').style.display = 'inline';
 }
 const addComment = async(e) => {
     e.preventDefault();
@@ -19,3 +20,9 @@ const addComment = async(e) => {
 }
 document.querySelector('#comment-add').addEventListener('click', commentHandler);
 document.querySelector('#comment').addEventListener('submit', addComment);
+
+document.querySelector('#cancel').addEventListener('click', function() {
+    document.querySelector('#comment').style.display = 'none';
+    document.querySelector('#comment-add').style.display = 'inline';
+    document.querySelector('#cancel').style.display = 'none';
+})
