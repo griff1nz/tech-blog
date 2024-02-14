@@ -61,7 +61,8 @@ router.get('/posts/:id', async (req, res) => {
 router.post('/posts/:id/comments', async (req, res) => {
     try {
         const today = moment().format('MM-DD-YYYY');
-        const userId = req.session.user_id;
+        const userId = req.session.userId;
+        console.log(userId);
         const commentData = await Comment.create({
             content: req.body.content,
             user_id: userId,
@@ -96,7 +97,7 @@ router.get('/posts/:id/comments', async (req, res) => {
 router.post('/posts', async (req, res) => {
     try {
         const today = moment().format('MM-DD-YYYY');
-        const userId = req.session.user_id;
+        const userId = req.session.userId;
         console.log(userId);
         const newPost = await BlogPost.create({
             title: req.body.title,

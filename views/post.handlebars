@@ -10,11 +10,17 @@
     </div>
     <div class="mt-4">
         <p>Comments: {{postData.comments.length}}</p>
+        <button id="comment-add">Add a comment</button>
+        <form id="comment" style="display: none">
+            <textarea class="w-10/12" id='comment-field'></textarea>
+            <button type="submit">Add comment</button>
+        </form>
         {{#each postData.comments as |comment|}}
         {{> comment-card}}
         {{/each}}
     </div>
 </div>
+<script src="/js/main.js"></script>
 {{else}}
 <p class="text-center">Please sign in to view posts.</p>
 {{/if}}
