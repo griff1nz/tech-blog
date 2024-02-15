@@ -18,8 +18,11 @@ const addComment = async(e) => {
         alert('Failed to post comment');
     }
 }
+
+
 document.querySelector('#comment-add').addEventListener('click', commentHandler);
 document.querySelector('#comment').addEventListener('submit', addComment);
+
 
 document.querySelector('#cancel').addEventListener('click', function() {
     document.querySelector('#comment').style.display = 'none';

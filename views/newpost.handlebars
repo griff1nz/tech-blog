@@ -1,2 +1,16 @@
-<h1>Testing testing</h1>
-<button>Add post</button>
+{{#if loggedIn}}
+<form id="newpost">
+    <div>
+        <label for="title">Title</label>
+        <input id="title">
+    </div>
+    <div>
+        <label for="content">Content</label>
+        <textarea id="content"></textarea>
+    </div>
+    <button type="submit">Add post</button>
+</form>
+<script src="/js/createpost.js"></script>
+{{else}}
+<h1>Please log in to create a post.</h1>
+{{/if}}

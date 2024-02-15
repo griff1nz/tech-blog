@@ -135,4 +135,26 @@ router.get('/newpost', async(req, res) => {
     res.render('newpost', {loggedIn: req.session.loggedIn});
 })
 
+router.delete('/posts/:id', async(req, res) => {
+    
+})
+
+router.get('/dashboard', async(req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    const currentUser = await User.findByPk(req.session.userId);
+    const postData = await BlogPost.findAll({
+        where: {
+            user_id: req.session.userId
+        },
+        include: [
+            {
+                model: Comment,
+    }]});
+    userPosts = postData.map((post) => 
+        post.get({ plain: true }));
+    res.render('dashboard', { loggedIn: req.session.loggedIn, sessionName: currentUser.username, userPosts });
+})
 module.exports = router;
