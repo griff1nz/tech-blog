@@ -127,19 +127,33 @@ router.get('/signup', async (req, res) => {
     res.render('signup');
 });
 
-router.get('/newpost', async(req, res) => {
+router.get('/newpost', async (req, res) => {
     if (!req.session.loggedIn) {
         res.redirect('/');
         return;
     }
-    res.render('newpost', {loggedIn: req.session.loggedIn});
+    res.render('newpost', { loggedIn: req.session.loggedIn });
 })
 
-router.delete('/posts/:id', async(req, res) => {
-    
+router.get('/posts/:id/edit', async (req, res) => {
+    const post = await BlogPost.findByPk(req.params.id); 
+    if (req.session.userId !== post.user_id) {
+        res.redirect('/');
+        return;
+    }
+    res.render('edit', { loggedIn: req.session.loggedIn, postTitle: post.title, postContent: post.content });
 })
 
-router.get('/dashboard', async(req, res) => {
+router.get('/posts/:id/delete', async(req, res) => {
+    const post = await BlogPost.findByPk(req.params.id);
+    if (req.session.userId !== post.user_id) {
+        res.redirect('/');
+        return;
+    }
+    res.render('delete', { loggedIn: req.session.loggedIn, postTitle: post.title, postContent: post.content });
+})
+
+router.get('/dashboard', async (req, res) => {
     if (!req.session.loggedIn) {
         res.redirect('/');
         return;
@@ -152,8 +166,9 @@ router.get('/dashboard', async(req, res) => {
         include: [
             {
                 model: Comment,
-    }]});
-    userPosts = postData.map((post) => 
+            }]
+    });
+    userPosts = postData.map((post) =>
         post.get({ plain: true }));
     res.render('dashboard', { loggedIn: req.session.loggedIn, sessionName: currentUser.username, userPosts });
 })

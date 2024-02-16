@@ -1,0 +1,14 @@
+{{#if loggedIn}}
+<h1>Delete post?</h1>
+    <div>
+        <h1>{{postTitle}}</h1>
+    </div>
+    <div>
+        <p>{{postContent}}</p>
+    </div>
+    <button id="yes">Yes</button>
+    <button id="no" onClick="location.href='/dashboard';">No</button>
+<script src="/js/edit.js"></script>
+{{else}}
+<h1>Please log in to edit a post.</h1>
+{{/if}}

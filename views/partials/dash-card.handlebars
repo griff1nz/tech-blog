@@ -1,4 +1,4 @@
-<a href="/posts/{{id}}">
+<a href="/posts/{{id}}/">
     <div class="border-1 border-black m-2 bg-slate-200">
         <div class="p-2 flex justify-between">
             <div>
@@ -10,6 +10,6 @@
     </div>
 </a>
 <div>
-    <button id="delete">Delete</button>
-    <button>Edit</button>
+    <button onClick="location.href = '/posts/{{id}}/delete';">Delete</button>
+    <button onClick="location.href = '/posts/{{id}}/edit';">Edit</button>
 </div>

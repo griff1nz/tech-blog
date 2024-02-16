@@ -1,0 +1,16 @@
+{{#if loggedIn}}
+<form id="editpost">
+    <div>
+        <label for="title">Title</label>
+        <input id="title" value="{{postTitle}}">
+    </div>
+    <div>
+        <label for="content">Content</label>
+        <textarea id="content">{{postContent}}</textarea>
+    </div>
+    <button type="submit">Update post</button>
+</form>
+<script src="/js/edit.js"></script>
+{{else}}
+<h1>Please log in to edit a post.</h1>
+{{/if}}
