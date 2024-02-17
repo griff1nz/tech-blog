@@ -144,6 +144,34 @@ router.get('/posts/:id/edit', async (req, res) => {
     res.render('edit', { loggedIn: req.session.loggedIn, postTitle: post.title, postContent: post.content });
 })
 
+router.put('/posts/:id/edit', async (req, res) => {
+    try {
+    const postToUpdate = await BlogPost.findByPk(req.params.id); 
+    if (req.session.userId !== postToUpdate.user_id) {
+        res.status(500).json("You can't edit that post.");
+        return;
+    }
+    // console.log(postToUpdate.date);
+    const updatedPost = await BlogPost.update(
+        {
+            title: req.body.title,
+            content: req.body.content,
+            date: postToUpdate.date,
+            user_id: postToUpdate.user_id,
+        },
+        {
+            where: {
+                id: req.params.id,
+            },
+        }
+    );
+    // res.redirect(`/posts/${req.params.id}`)
+    res.status(200).json()
+    } catch(err) {
+        res.status(500).json(err);
+    }
+})
+
 router.get('/posts/:id/delete', async(req, res) => {
     const post = await BlogPost.findByPk(req.params.id);
     if (req.session.userId !== post.user_id) {
