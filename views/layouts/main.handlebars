@@ -10,17 +10,20 @@
 </head>
 
 <body>
-    <div class="bg-blue-400 p-4">
-        <a href='/'><h1 class="text-red-700 text-6xl">MVC Tech Blog</h1></a>
+    <div class="bg-blue-400 p-4 flex justify-between items-center">
+        <a href='/'>
+            <h1 class="text-red-700 text-6xl">MVC Tech Blog</h1>
+        </a>
+        {{#if loggedIn}}
+        <div class="m-2">
+            <button id="logout" class="text-xl mx-2">Logout</button>
+            <button onClick='location.href = "/dashboard";' id="dashboard" class="text-xl mx-2">Dashboard</button>
+            {{!--https://stackoverflow.com/questions/16562577/how-can-i-make-a-button-redirect-my-page-to-another-page--}}
+        </div>
+        {{else}}
+        <button onClick="location.href='/login';" class="mx-2 text-xl">Login</button>
+        {{/if}}
     </div>
-    {{#if loggedIn}}
-    <div class="m-2">
-    <button id="logout">Logout</button>
-    <button onClick='location.href = "/dashboard";' id="dashboard">Dashboard</button> {{!--https://stackoverflow.com/questions/16562577/how-can-i-make-a-button-redirect-my-page-to-another-page--}}
-    </div>
-    {{else}}
-    <a href='/login'><button>Login</button></a>
-    {{/if}}
     {{{ body }}}
     {{#if loggedIn}}
     <script src="/js/logout.js"></script>

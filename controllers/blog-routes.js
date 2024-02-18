@@ -166,7 +166,27 @@ router.put('/posts/:id/edit', async (req, res) => {
         }
     );
     // res.redirect(`/posts/${req.params.id}`)
-    res.status(200).json()
+    res.status(200).json(updatedPost);
+    } catch(err) {
+        res.status(500).json(err);
+    }
+})
+
+router.delete('/posts/:id/delete', async(req, res) => {
+    try {
+        const postToDelete = await BlogPost.findByPk(req.params.id); 
+        if (req.session.userId !== postToDelete.user_id) {
+            res.status(500).json("You can't delete that post.");
+            return;
+        }
+        const deletedPost = await BlogPost.destroy(
+            {
+                where: {
+                    id: req.params.id
+                }
+            }
+        )
+        res.status(200).json(deletedPost);
     } catch(err) {
         res.status(500).json(err);
     }
