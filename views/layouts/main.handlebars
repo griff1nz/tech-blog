@@ -10,18 +10,19 @@
 </head>
 
 <body>
-    <div class="bg-blue-400 p-4 flex justify-between items-center">
+    <div class="bg-zinc-800 p-4 flex justify-between items-center">
         <a href='/'>
-            <h1 class="text-red-700 text-6xl">MVC Tech Blog</h1>
+            <h1 class="text-red-700 sm:text-5xl text-3xl font-bold">MVC Tech Blog</h1>
         </a>
+        {{!-- Only want to show the logout and dashboard buttons if the user is logged in --}}
         {{#if loggedIn}}
         <div class="m-2">
-            <button id="logout" class="text-xl mx-2">Logout</button>
-            <button onClick='location.href = "/dashboard";' id="dashboard" class="text-xl mx-2">Dashboard</button>
+            <button id="logout" class="text-sm sm:text-xl mx-2 p-2 rounded-md bg-stone-600 hover:bg-zinc-400 transition ease-in-out text-zinc-300">Logout</button>
+            <button onClick='location.href = "/dashboard";' id="dashboard" class="sm:text-xl text-sm mx-2 p-2 bg-stone-600 rounded-md hover:bg-zinc-400 transition ease-in-out text-zinc-300">Dashboard</button>
             {{!--https://stackoverflow.com/questions/16562577/how-can-i-make-a-button-redirect-my-page-to-another-page--}}
         </div>
         {{else}}
-        <button onClick="location.href='/login';" class="mx-2 text-xl">Login</button>
+        <button onClick="location.href='/login';" class="mx-2 sm:text-xl text-sm bg-stone-600 p-2 rounded-md hover:bg-zinc-400 transition ease-in-out">Login</button>
         {{/if}}
     </div>
     {{{ body }}}

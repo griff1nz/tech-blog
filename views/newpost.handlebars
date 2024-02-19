@@ -1,15 +1,23 @@
 {{#if loggedIn}}
-<form id="newpost">
-    <div>
-        <label for="title">Title</label>
-        <input id="title">
-    </div>
-    <div>
-        <label for="content">Content</label>
-        <textarea id="content"></textarea>
-    </div>
-    <button type="submit">Add post</button>
-</form>
+<div class="w-10/12 border-2 border-black mx-auto p-3 mt-2 rounded-sm">
+    <form id="newpost">
+        <div class="flex flex-col p-4 mx-auto m-4">
+            <div class="flex justify-between mb-2">
+                <label for="title">Title</label>
+                <input id="title" class="w-10/12 border-2 border-black">
+            </div>
+            <div class="flex justify-between mb-2">
+                <label for="content">Content</label>
+                <textarea id="content" class="w-10/12 border-2 border-black"></textarea>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <button type="submit"
+                class="border border-black p-2 bg-stone-300 rounded-md hover:bg-stone-600 transition ease-in-out">Add
+                post</button>
+        </div>
+    </form>
+</div>
 <script src="/js/createpost.js"></script>
 {{else}}
 <h1>Please log in to create a post.</h1>

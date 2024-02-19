@@ -120,6 +120,7 @@ router.get('/login', async (req, res) => {
 });
 
 router.get('/signup', async (req, res) => {
+    // Redirects to homepage if the user is already logged in
     if (req.session.loggedIn) {
         res.redirect('/');
         return;
@@ -129,6 +130,7 @@ router.get('/signup', async (req, res) => {
 
 router.get('/newpost', async (req, res) => {
     if (!req.session.loggedIn) {
+        // Redirects to homepage if someone attempts to make a post without logging in
         res.redirect('/');
         return;
     }
@@ -137,6 +139,7 @@ router.get('/newpost', async (req, res) => {
 
 router.get('/posts/:id/edit', async (req, res) => {
     const post = await BlogPost.findByPk(req.params.id); 
+    // Redirects to homepage if the post does not belong to the user
     if (req.session.userId !== post.user_id) {
         res.redirect('/');
         return;
@@ -147,6 +150,7 @@ router.get('/posts/:id/edit', async (req, res) => {
 router.put('/posts/:id/edit', async (req, res) => {
     try {
     const postToUpdate = await BlogPost.findByPk(req.params.id); 
+    // Stops a user from editing another user's post
     if (req.session.userId !== postToUpdate.user_id) {
         res.status(500).json("You can't edit that post.");
         return;
@@ -175,6 +179,7 @@ router.put('/posts/:id/edit', async (req, res) => {
 router.delete('/posts/:id/delete', async(req, res) => {
     try {
         const postToDelete = await BlogPost.findByPk(req.params.id); 
+        // Stops a user from deleting another user's post via Postman or another API test app
         if (req.session.userId !== postToDelete.user_id) {
             res.status(500).json("You can't delete that post.");
             return;
@@ -194,6 +199,7 @@ router.delete('/posts/:id/delete', async(req, res) => {
 
 router.get('/posts/:id/delete', async(req, res) => {
     const post = await BlogPost.findByPk(req.params.id);
+    // Redirects the user to the homepage if they attempt to delete another user's post
     if (req.session.userId !== post.user_id) {
         res.redirect('/');
         return;

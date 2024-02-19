@@ -19,6 +19,7 @@ Comment.init(
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
+                // Don't want blank comments
                 len: [1]
             },
         },

@@ -1,8 +1,9 @@
 {{#if loggedIn}}
+{{!-- Again, only viewable if the user is logged in --}}
 <div class="m-2">
 
     <div class="bg-slate-200 p-2">
-        <p class="text-6xl">{{postData.title}}</p>
+        <p class="sm:text-6xl text-3xl">{{postData.title}}</p>
     </div>
     <div class='border-2 border-slate-200 p-2'>
         <p>{{postData.content}}</p>
@@ -10,12 +11,19 @@
     </div>
     <div class="mt-4">
         <p>Comments: {{postData.comments.length}}</p>
-        <button id="comment-add">Add a comment</button>
+        <button id="comment-add"
+            class="border border-black p-2 bg-stone-300 rounded-md hover:bg-stone-600 transition ease-in-out mb-2">Add a
+            comment</button>
         <form id="comment" style="display: none">
-            <textarea class="w-10/12" id='comment-field'></textarea>
-            <button type="submit">Add comment</button>
+            <textarea class="w-full border-black border-2" id='comment-field'></textarea>
+            <button type="submit"
+                class="border border-black p-2 bg-stone-300 rounded-md hover:bg-stone-600 transition ease-in-out">Add
+                comment</button>
         </form>
-            <button id="cancel" style="display: none">Cancel</button>
+        {{!-- Cancel button has to be separate from the form otherwise it will attempt to submit it --}}
+        <button id="cancel" style="display: none"
+            class="border border-black p-2 bg-stone-300 rounded-md hover:bg-stone-600 transition ease-in-out">Cancel</button>
+
         {{#each postData.comments as |comment|}}
         {{> comment-card}}
         {{/each}}

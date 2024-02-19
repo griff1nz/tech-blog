@@ -22,6 +22,7 @@ BlogPost.init(
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
+                // Don't want blank posts
                 len: [1]
             }
         },

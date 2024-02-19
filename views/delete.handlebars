@@ -1,14 +1,19 @@
 {{#if loggedIn}}
-<h1>Delete post?</h1>
-    <div>
-        <h1>{{postTitle}}</h1>
+<div class="p-2 m-2">
+    <h1 class="text-6xl text-red-500 text-center">Delete post?</h1>
+    <div class="w-10/12 border-2 border-black mx-auto mt-2 rounded-sm">
+        <div class="bg-slate-200 p-2">
+            <h1 class="text-4xl">{{postTitle}}</h1>
+        </div>
+        <div class="p-2">
+            <p>{{postContent}}</p>
+        </div>
+        <div class="flex p-2 justify-center">
+            <button id="yes" class="mr-2 p-2 bg-red-500 rounded-md hover:bg-red-700 transition ease-in-out">Yes</button>
+            <button id="no" onClick="location.href='/dashboard';" class="mr-2 p-2 bg-green-200 rounded-md hover:bg-green-500 transition ease-in-out">No</button>
+        </div>
     </div>
-    <div>
-        <p>{{postContent}}</p>
-    </div>
-    <button id="yes">Yes</button>
-    <button id="no" onClick="location.href='/dashboard';">No</button>
-<script src="/js/delete.js"></script>
-{{else}}
-<h1>Please log in to edit a post.</h1>
-{{/if}}
+    <script src="/js/delete.js"></script>
+    {{else}}
+    <h1>Please log in to edit a post.</h1>
+    {{/if}}

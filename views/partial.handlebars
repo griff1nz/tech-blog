@@ -1,11 +1,12 @@
 {{!-- <h1 class="text-9xl">Testing ze main layout</h1> --}}
 {{#if loggedIn}}
 <div class="p-2 grid">
+    {{!-- Only want to show posts if the user is logged in --}}
     <button onClick='location.href = "/newpost";' id="newpost" class="mx-auto w-5/12 p-2 bg-blue-200 hover:bg-blue-500 transition ease-in-out duration-300 rounded-lg">+ Add new post</button>
     {{#each posts as |data|}}
     {{> card}}
     {{/each}}
 </div>
 {{else}}
-<p class="text-center">Welcome! Please sign in.</p>
+<p class="text-center text-4xl mt-2">Welcome! Please <a href='/login' class="underline">sign in.</a></p>
 {{/if}}

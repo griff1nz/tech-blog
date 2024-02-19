@@ -1,3 +1,4 @@
+// Average server.js file 
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
