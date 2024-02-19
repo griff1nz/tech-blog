@@ -11,7 +11,7 @@ const app = express();
 const sess = {
     secret: 'Lmao',
     cookie: {
-        maxAge: 60*60*1000,
+        maxAge: 60*60*1000, // Times out after an hour
         // httpOnly: true,
         // secure: false,
         // sameSite: 'strict',
