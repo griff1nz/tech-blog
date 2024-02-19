@@ -1,4 +1,11 @@
 {
+  "name": "tech-blog",
+  "version": "1.0.0",
+  "description": "A blog website built with Handlebars.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+  },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "connect-session-sequelize": "^7.1.7",
